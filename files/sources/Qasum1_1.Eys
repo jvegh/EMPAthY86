@@ -1,0 +1,28 @@
+# This is summing up elements of vector, EMPA way
+# Will sum elements secretly, using mass processing
+	.pos 0                  # Program starts at address 0000
+	irmovl $1, %edx	        # No of items to sum
+	irmovl array, %ecx      # Array address
+
+# Do summing here
+	xorl %eax, %eax		# sum = 0
+        QAlloc 1, %edx          # allocate %edx times a helper core
+        rrmovl %ecx, %esv	# Overwrite with array address
+QT1LoopC:QTCreate QT1LoopT, %eax
+        mrmovl  (%esv), %ecx	# This is the value
+        addl    %ecx, %eax	# Add it to the collected sum
+QT1LoopT:QTerm
+        halt
+
+# Array of 4 elements
+	.align 4
+array:	.long 0xd
+	.long 0xc0
+	.long 0xb00
+	.long 0xa000
+	.long 0xf0000
+	.long 0xe00000
+
+# The stack starts here and grows to lower addresses
+	.pos 0x200		
+Stack:	 

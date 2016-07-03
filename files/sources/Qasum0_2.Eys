@@ -1,0 +1,32 @@
+# This is summing up elements of vector, EMPA way
+# Will sum elements secretly, using mass processing
+	.pos 0                  # Program starts at address 0000
+	irmovl $2,%edx	        # No of items to sum
+	irmovl array,%ecx       # Array address
+
+# Do summing here
+	xorl %eax,%eax		# sum = 0
+	andl   %edx,%edx	# Set condition codes
+	je     End
+Loop:	mrmovl (%ecx),%esi	# get *Start
+	addl %esi,%eax          # add to sum
+	irmovl $4,%ebx          # 
+	addl %ebx,%ecx          # Start++
+	irmovl $-1,%ebx	        # 
+	addl %ebx,%edx          # Count--
+	jne    Loop             # Stop when 0
+End:	
+        halt
+
+# Array of 4 elements
+	.align 4
+array:	.long 0xd
+	.long 0xc0
+	.long 0xb00
+	.long 0xa000
+	.long 0xf0000
+	.long 0xe00000
+
+# The stack starts here and grows to lower addresses
+	.pos 0x200		
+Stack:	 
