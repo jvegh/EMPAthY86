@@ -21,7 +21,7 @@ The consequences of introducing the approach are promiseful: the single processo
 (interrupt latency and predictability) considerably enhances, reaching good processor performance needs less
 technologycal efforts (less transistors) and even the energy consumption can be enhanced.
 
-On this site some tools for making computing in this style is presented. The main piece is an EMPA simulator,
+On this site some tools for making computing in this style are presented. The main piece is an EMPA simulator,
 which is able to simulate EMPA program execution (both in GUI and CLI interface style), an assembler which
 can produce executable files for the simulator, some example programs and documentation.
 
